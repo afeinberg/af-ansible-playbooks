@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>EXTRASSH</short>
+  <description>Ssh on extra ports to get around blocks.</description>
+  <port protocol="tcp" port="2222"/>
+</service>

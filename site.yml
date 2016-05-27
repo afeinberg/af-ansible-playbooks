@@ -1,0 +1,21 @@
+---
+
+- name: allow ssh to listen on port 2222
+  hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  roles:
+    - extrassh
+  tags:
+    - extrassh
+
+- name: configure the firewall on all fedora nodes
+  hosts: fedora
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  roles:
+    - firewall-cmd
+  tags:
+    - firewall

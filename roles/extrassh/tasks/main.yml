@@ -1,0 +1,12 @@
+---
+- name: enable listening on ports 22 and 2222
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - { regexp: '^Port 22$', line: 'Port 22' }
+    - { regexp: '^Port 2222$', line: 'Port 2222' }
+  notify:
+    - reload sshd
