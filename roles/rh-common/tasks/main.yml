@@ -1,0 +1,9 @@
+---
+- name: install mosh
+  yum: name=mosh state=latest
+
+- name: install emacs
+  yum: name=emacs state=latest
+
+- name: install tmux
+  yum: name=tmux state=latest

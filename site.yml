@@ -1,5 +1,16 @@
 ---
 
+- name: perform common rh configuration
+  hosts: redhat
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  roles:
+    - rh-common
+  tags:
+    - rh-common
+    - common
+
 - name: allow ssh to listen on port 2222
   hosts: all
   become: yes
