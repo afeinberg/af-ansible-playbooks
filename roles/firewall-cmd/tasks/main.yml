@@ -1,23 +1,17 @@
 ---
-# setup basic firewall rules
 
-- name: add http service
-  command: firewall-cmd --add-service=http --permanent
+- firewalld: service=https permanent=true state=enabled
 
-- name: add https service
-  command: firewall-cmd --add-service=https --permanent
+- firewalld: service=http permanent=true state=enabled
 
-- name: create mosh.xml if does not exist
-  copy: src=mosh.xml dest=/etc/firewalld/services/mosh.xml force=no
+- firewalld: service=mosh permanent=true state=enabled
 
-- name: add mosh service
-  command: firewall-cmd --add-service=mosh --permanent
-
-- name: create extrassh.xml if does not exist
+- name: create extrassh service
   copy: src=extrassh.xml dest=/etc/firewalld/services/extrassh.xml
+  register: extrassh_xml
 
-- name: add extrassh service
-  command: firewall-cmd --add-service=extrassh --permanent
-
-- name: reload firewall rules
+- name: reload firewalld rules
   command: firewall-cmd --reload
+  when: extrassh_xml|changed
+
+- firewalld: service=extrassh permanent=true state=enabled
